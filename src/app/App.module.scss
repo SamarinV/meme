@@ -6,6 +6,7 @@
 .main {
 	@apply  p-5 text-center
 }
+
 .button {
 	@apply py-3 px-5 bg-orange-600 rounded-md mb-5 w-80 transition-colors duration-300;
 	&:hover {
