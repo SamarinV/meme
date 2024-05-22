@@ -3,20 +3,34 @@
 import Card from "@/components/Card/Card"
 import Header from "@/components/Header/Header"
 import { Meme } from "@/components/types/types"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import useLocalStorage from "use-local-storage"
 import s from "./App.module.scss"
 import { api } from "@/api/api"
 
 export default function App() {
   const [meme, setMeme] = useState<Meme | null>(null)
+  const [isDark, setIsDark] = useLocalStorage("isDark", false)
+  const [mounted, setMounted] = useState(false)
 
-  const prefers = window.matchMedia("(prefers-color-scheme: dark)").matches
-  const [isDark, setIsDark] = useLocalStorage("isDark", prefers)
+  useEffect(() => {
+		const myLocalStorage = localStorage.getItem("isDark") === "true"
+		if (myLocalStorage){
+			setIsDark(true)
+		} else {
+			const prefers = window.matchMedia("(prefers-color-scheme: dark)").matches
+			setIsDark(prefers)
+		}
+    setMounted(true)
+  }, [])
 
   const getMemeHandler = async () => {
     const newMemeResponse = await api.getMemeGimme()
     newMemeResponse && setMeme(newMemeResponse)
+  }
+
+  if (!mounted) {
+    return null
   }
 
   return (
