@@ -1,8 +1,9 @@
 "use client"
 
+import Header from "@/components/Header/Header"
 import Image from "next/image"
-import { useState, useEffect } from "react"
-import s from './Home.module.scss'
+import { useEffect, useState } from "react"
+import s from "./App.module.scss"
 
 interface Meme {
   postLink: string
@@ -37,7 +38,6 @@ export default function Home() {
     if (res.ok) {
       const data: Meme = await res.json()
       setMeme(data)
-      console.log(data)
     } else {
       console.error("Error fetching data")
     }
@@ -47,7 +47,7 @@ export default function Home() {
     // Определяем подходящее изображение в зависимости от разрешения экрана
     let optimalImage
     if (windowWidth <= 320) {
-			const findImage = previews.find((preview) => preview.includes("width=320"))
+      const findImage = previews.find((preview) => preview.includes("width=320"))
       findImage && (optimalImage = findImage)
     } else if (windowWidth > 320) {
       const findImage = previews.find((preview) => preview.includes("width=640"))
@@ -63,17 +63,24 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24 bg-slate-700 text-slate-200">
-      <button className="py-3 px-5 bg-orange-600 rounded-md mb-5 " onClick={getMemeHandler}>
-        GET MEME
-      </button>
-      {meme && (
-        <div className="bg-slate-600 p-4 text-center shadow-xl rounded-sm">
-          <h2>Title: {meme.title}</h2>
-          <p>Author: {meme.author}</p>
-          <Image src={getOptimalImage(meme.preview)} alt={meme.title} width={300} height={300} />
-        </div>
-      )}
-    </main>
+    <div className={s.App}>
+      <Header />
+      <main className={s.main}>
+        <button className={s.button} onClick={getMemeHandler}>
+          GET MEME
+        </button>
+
+        {meme && getOptimalImage(meme.preview) && (
+          <div className={s.card}>
+            <div className="mb-4">
+              <h2>Title: {meme.title}</h2>
+              <p>Author: {meme.author}</p>
+              <p>Subreddit: {meme.subreddit}</p>
+            </div>
+            <Image className={s.img} src={getOptimalImage(meme.preview)} alt={meme.title} width={400} height={400} />
+          </div>
+        )}
+      </main>
+    </div>
   )
 }
