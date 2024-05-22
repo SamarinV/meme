@@ -1,11 +1,13 @@
 "use client"
 
-import React from "react"
-import { useTheme } from "../ThemeContext/ThemeContext"
 import s from "./ToggleTheme.module.scss"
 
-const ToggleTheme = () => {
-  const { theme, toggleTheme } = useTheme()
+type Props = {
+	isDark: boolean
+	setIsDark: (value: boolean) => void
+}
+
+const ToggleTheme = ({isDark, setIsDark}: Props) => {
 
   return (
     <div className={s.toggleContainer}>
@@ -13,10 +15,10 @@ const ToggleTheme = () => {
         type="checkbox"
         id="check"
         className={s.toggle}
-        onChange={toggleTheme}
-        checked={theme === "light" ? true : false}
+        onChange={() => setIsDark(!isDark)}
+        checked={isDark ? true : false}
       />
-      <label className={s.label} htmlFor="check">{theme === "light" ? "Dark" : "Light"} mode</label>
+      <label className={s.label} htmlFor="check">{isDark ? "Dark" : "Light"} mode</label>
     </div>
   )
 }

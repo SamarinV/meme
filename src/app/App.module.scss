@@ -1,20 +1,14 @@
 .App {
-	@apply flex min-h-screen flex-col;
+	@apply flex min-h-screen flex-col transition-colors duration-300;
 	color: var(--foreground-rgb);
 	background-color: var(--background);
-	transition: background-color 0.4s ease-in-out
 }
 .main {
 	@apply  p-5 text-center
 }
 .button {
-	@apply py-3 px-5 bg-orange-600 rounded-md mb-5 w-80
-}
-.card {
-	@apply p-4 text-center shadow-xl rounded-sm;
-	background: var(--background-card);
-}
-.img {
-	width: 100%;
-	height: auto;
+	@apply py-3 px-5 bg-orange-600 rounded-md mb-5 w-80 transition-colors duration-300;
+	&:hover {
+		@apply bg-orange-700;
+	}
 }

@@ -1,0 +1,7 @@
+.card {
+	@apply p-4 shadow-xl rounded-sm flex flex-col items-center;
+	background: var(--background-card);
+}
+.img {
+	@apply w-auto h-auto;
+}

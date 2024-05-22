@@ -10,14 +10,10 @@
 	--toggle-fg: #ffd000;
 }
 
-[theme="dark"] {
+[data-theme="dark"] {
 	--foreground-rgb: theme("colors.slate.200");
 	--background: theme("colors.slate.700");
 	--background-card: theme("colors.slate.600");
 	--toggle-bg: #3452fc;
 	--toggle-fg: #0429fb;
-}
-
-html {
-	
 }
