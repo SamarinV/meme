@@ -3,12 +3,11 @@
 import s from "./ToggleTheme.module.scss"
 
 type Props = {
-	isDark: boolean
-	setIsDark: (value: boolean) => void
+  isDark: boolean
+  setIsDark: (value: boolean) => void
 }
 
-const ToggleTheme = ({isDark, setIsDark}: Props) => {
-
+const ToggleTheme = ({ isDark, setIsDark }: Props) => {
   return (
     <div className={s.toggleContainer}>
       <input
@@ -18,7 +17,9 @@ const ToggleTheme = ({isDark, setIsDark}: Props) => {
         onChange={() => setIsDark(!isDark)}
         checked={isDark ? true : false}
       />
-      <label className={s.label} htmlFor="check">{isDark ? "Dark" : "Light"} mode</label>
+      <label className={s.label} htmlFor="check">
+        {isDark ? "Dark" : "Light"} theme
+      </label>
     </div>
   )
 }
